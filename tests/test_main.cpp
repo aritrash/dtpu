@@ -1,12 +1,9 @@
-void test_trit();
-void test_vector();
-void test_ops();
-
 #include <iostream>
 
 void test_trit();
 void test_vector();
 void test_ops();
+void test_packed_vector();
 
 int main()
 {
@@ -21,6 +18,10 @@ int main()
     std::cout << "[TEST] Ops\n";
     test_ops();
     std::cout << "[PASS] Ops\n";
+
+    std::cout << "[TEST] PackedTritVector\n";
+    test_packed_vector();
+    std::cout << "[PASS] PackedTritVector\n";
 
     std::cout << "\nAll tests passed.\n";
 

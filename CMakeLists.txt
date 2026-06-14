@@ -10,6 +10,8 @@ add_executable(
     src/main.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
+    libtrit/src/ops.cpp
+    libtrit/src/packed_vector.cpp
 )
 
 add_executable(
@@ -19,9 +21,11 @@ add_executable(
     tests/test_trit.cpp
     tests/test_vector.cpp
     tests/test_ops.cpp
-
+    tests/test_packedvector.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
+    libtrit/src/ops.cpp
+    libtrit/src/packed_vector.cpp
 )
 
 target_include_directories(
