@@ -10,7 +10,7 @@ DTPU investigates the use of ternary-encoded storage and computation to increase
 Instead of storing binary values, DTPU stores trits:
 
 -1 → 10
- 0 → 00
+0 → 00
 +1 → 01
 
 The unused state:
