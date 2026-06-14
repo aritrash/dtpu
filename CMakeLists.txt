@@ -28,10 +28,29 @@ add_executable(
     libtrit/src/packed_vector.cpp
 )
 
+add_executable(
+    dtpu_bench
+
+    benchmarks/benchmark_main.cpp
+    benchmarks/benchmark_dot_product.cpp
+
+    libtrit/src/trit.cpp
+    libtrit/src/vector.cpp
+    libtrit/src/packed_vector.cpp
+    libtrit/src/ops.cpp
+)
+
 target_include_directories(
     dtpu_tests
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
+)
+
+target_include_directories(
+    dtpu_bench
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/benchmarks
 )
 
 target_include_directories(
