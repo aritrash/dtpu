@@ -40,4 +40,56 @@ void test_ops()
     assert(
         dot_product(c, d) == 3
     );
+
+    PackedTritVector pa;
+    PackedTritVector pb;
+
+    pa.push_back(Trit::NEG);
+    pa.push_back(Trit::ZERO);
+    pa.push_back(Trit::POS);
+
+    pb.push_back(Trit::POS);
+    pb.push_back(Trit::POS);
+    pb.push_back(Trit::POS);
+
+    assert(
+        dot_product(pa, pb) == 0
+    );
+
+    {
+        TritVector a
+        {
+            Trit::NEG,
+            Trit::POS,
+            Trit::ZERO,
+            Trit::NEG,
+            Trit::POS
+        };
+
+        TritVector b
+        {
+            Trit::POS,
+            Trit::NEG,
+            Trit::POS,
+            Trit::NEG,
+            Trit::ZERO
+        };
+
+        PackedTritVector pc;
+        PackedTritVector pd;
+
+        for(std::size_t i = 0;
+            i < a.size();
+            ++i)
+        {
+            pc.push_back(a[i]);
+            pd.push_back(b[i]);
+        }
+
+        assert(
+            dot_product(a, b)
+            ==
+            dot_product(pc, pd)
+        );
+    }
 }
