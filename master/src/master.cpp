@@ -84,6 +84,13 @@ namespace dtpu
             );
         }
 
+        if(a.size() > 32766)
+        {
+            throw std::runtime_error(
+                "Protocol payload limit exceeded"
+            );
+        }
+
         Packet request;
 
         request.header.opcode =
@@ -92,21 +99,19 @@ namespace dtpu
         request.header.request_id =
             next_request_id();
 
-        //
-        // Payload layout
-        //
-        // Byte 0
-        // Vector length
-        //
-        // Then:
-        // Vector A
-        // Vector B
-        //
+        // Payload format: 2 bytes
+
+        uint16_t length = static_cast<uint16_t>(a.size());
 
         request.payload.push_back(
-            static_cast<uint8_t>(
-                a.size()
+            length & 0xFF
+        );
+
+        request.payload.push_back(
+            (
+                length >> 8
             )
+            & 0xFF
         );
 
         for(

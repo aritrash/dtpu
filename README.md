@@ -248,15 +248,12 @@ Active Development
 
 Current Milestone:
 
-**v0.1 Distributed Runtime**
+###  v0.4 Milestones
 
-Upcoming Milestones:
-
-- Hardware Integration
-- Multi-node Clustering
-- Networked Inference
-- RP2350B Migration
-- Accelerator Board Development
+- Expanded protocol support from 255 trits to 32766 trits
+- Characterized protocol scalability limits
+- Added distributed runtime benchmarking
+- Added runtime scaling and overhead analysis
 
 ---
 
