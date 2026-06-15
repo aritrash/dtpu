@@ -51,6 +51,23 @@ add_executable(
     libtrit/src/ops.cpp
 )
 
+add_executable(
+    dtpu_sim
+
+    sim/sim_main.cpp
+
+    libtrit/src/trit.cpp
+    libtrit/src/vector.cpp
+    libtrit/src/packed_vector.cpp
+    libtrit/src/ops.cpp
+
+    protocol/src/packet.cpp
+
+    worker/src/worker.cpp
+
+    master/src/master.cpp
+)
+
 target_include_directories(
     dtpu_tests
     PRIVATE
@@ -77,4 +94,14 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/protocol/include
     ${CMAKE_SOURCE_DIR}/worker/include
     ${CMAKE_SOURCE_DIR}/master/include
+)
+
+target_include_directories(
+    dtpu_sim
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/protocol/include
+    ${CMAKE_SOURCE_DIR}/worker/include
+    ${CMAKE_SOURCE_DIR}/master/include
+    ${CMAKE_SOURCE_DIR}/sim
 )
