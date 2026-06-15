@@ -1,7 +1,9 @@
 #include <iostream>
+
 #include "master.hpp"
 #include "worker.hpp"
 #include "packet.hpp"
+#include "vector.hpp"
 
 using namespace dtpu;
 
@@ -11,17 +13,32 @@ int main()
 
     Worker worker;
 
+    TritVector a
+    {
+        Trit::NEG,
+        Trit::ZERO,
+        Trit::POS
+    };
+
+    TritVector b
+    {
+        Trit::POS,
+        Trit::POS,
+        Trit::POS
+    };
+
     //
-    // Build request
+    // Master builds request
     //
 
     Packet request =
-        master.make_ping();
+        master.make_dot_product(
+            a,
+            b
+        );
 
     std::cout
-        << "[MASTER] Created request "
-        << request.header.request_id
-        << '\n';
+        << "[MASTER] Created DOT_PRODUCT request\n";
 
     //
     // Simulate wire
@@ -52,7 +69,7 @@ int main()
         );
 
     std::cout
-        << "[WORKER] Executed packet\n";
+        << "[WORKER] Executed DOT_PRODUCT\n";
 
     //
     // Return wire
@@ -68,21 +85,15 @@ int main()
             return_wire
         );
 
-    bool success =
-        master.process_ping(
+    int32_t result =
+        master.process_dot_product(
             master_response
         );
 
-    if(success)
-    {
-        std::cout
-            << "[MASTER] PING SUCCESS\n";
-    }
-    else
-    {
-        std::cout
-            << "[MASTER] PING FAILED\n";
-    }
+    std::cout
+        << "[MASTER] Result = "
+        << result
+        << '\n';
 
     return 0;
 }

@@ -40,8 +40,8 @@ add_executable(
 add_executable(
     dtpu_bench
 
-    benchmarks/benchmark_main.cpp
-    benchmarks/benchmark_dot_product.cpp
+    benchmarks/dot_bench/benchmark_main.cpp
+    benchmarks/dot_bench/benchmark_dot_product.cpp
     protocol/src/packet.cpp
     worker/src/worker.cpp
     master/src/master.cpp
@@ -66,6 +66,27 @@ add_executable(
     worker/src/worker.cpp
 
     master/src/master.cpp
+)
+
+add_executable(
+    dtpu_dist_bench
+
+    benchmarks/dist_bench/benchmark_dist_main.cpp
+
+    benchmarks/dist_bench/benchmark_packet.cpp
+
+    benchmarks/dist_bench/benchmark_distributed.cpp
+
+    libtrit/src/trit.cpp
+    libtrit/src/vector.cpp
+    libtrit/src/packed_vector.cpp
+    libtrit/src/ops.cpp
+
+    protocol/src/packet.cpp
+
+    master/src/master.cpp
+
+    worker/src/worker.cpp
 )
 
 target_include_directories(
@@ -104,4 +125,14 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/worker/include
     ${CMAKE_SOURCE_DIR}/master/include
     ${CMAKE_SOURCE_DIR}/sim
+)
+
+target_include_directories(
+    dtpu_dist_bench
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/protocol/include
+    ${CMAKE_SOURCE_DIR}/worker/include
+    ${CMAKE_SOURCE_DIR}/master/include
+    ${CMAKE_SOURCE_DIR}/benchmarks/dist_bench
 )
