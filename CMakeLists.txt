@@ -9,6 +9,7 @@ add_executable(
     dtpu
     src/main.cpp
     protocol/src/packet.cpp
+    worker/src/worker.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
     libtrit/src/ops.cpp
@@ -24,7 +25,9 @@ add_executable(
     tests/test_ops.cpp
     tests/test_packedvector.cpp
     tests/test_packet.cpp
+    tests/test_worker.cpp
     protocol/src/packet.cpp
+    worker/src/worker.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
     libtrit/src/ops.cpp
@@ -37,7 +40,7 @@ add_executable(
     benchmarks/benchmark_main.cpp
     benchmarks/benchmark_dot_product.cpp
     protocol/src/packet.cpp
-
+    worker/src/worker.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
     libtrit/src/packed_vector.cpp
@@ -49,6 +52,7 @@ target_include_directories(
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
     ${CMAKE_SOURCE_DIR}/protocol/include
+    ${CMAKE_SOURCE_DIR}/worker/include
 )
 
 target_include_directories(
@@ -56,6 +60,7 @@ target_include_directories(
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
     ${CMAKE_SOURCE_DIR}/protocol/include
+    ${CMAKE_SOURCE_DIR}/worker/include
     ${CMAKE_SOURCE_DIR}/benchmarks
 )
 
@@ -64,4 +69,5 @@ target_include_directories(
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
     ${CMAKE_SOURCE_DIR}/protocol/include
+    ${CMAKE_SOURCE_DIR}/worker/include
 )
