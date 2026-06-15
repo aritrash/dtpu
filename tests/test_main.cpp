@@ -6,6 +6,7 @@ void test_ops();
 void test_packed_vector();
 void test_packet();
 void test_worker();
+void test_worker_dot_product();
 void test_master_ping();
 void test_master_dot_product();
 
@@ -35,13 +36,17 @@ int main()
     test_worker();
     std::cout << "[PASS] Worker\n";
 
+    std::cout << "[TEST] Worker Dot Product\n";
+    test_worker_dot_product();
+    std::cout << "[PASS] Worker Dot Product\n";
+
     std::cout << "[TEST] Master\n";
     test_master_ping();
     std::cout << "[PASS] Master\n";
 
-    std::cout << "[TEST] Dot Product\n";
+    std::cout << "[TEST] Master Dot Product\n";
     test_master_dot_product();
-    std::cout << "[PASS] Dot Product\n";
+    std::cout << "[PASS] Master Dot Product\n";
 
     std::cout << "\nAll tests passed.\n";
 

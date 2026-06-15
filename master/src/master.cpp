@@ -155,7 +155,7 @@ namespace dtpu
         )
         {
             throw std::runtime_error(
-                "Invalid response"
+                "Invalid response opcode"
             );
         }
 
@@ -166,29 +166,38 @@ namespace dtpu
         )
         {
             throw std::runtime_error(
-                "Invalid payload"
+                "Invalid payload size"
             );
         }
 
         int32_t result = 0;
 
-        result |= response.payload[0];
+        result |=
+            static_cast<int32_t>(
+                response.payload[0]
+            );
 
         result |=
         (
-            response.payload[1]
+            static_cast<int32_t>(
+                response.payload[1]
+            )
             << 8
         );
 
         result |=
         (
-            response.payload[2]
+            static_cast<int32_t>(
+                response.payload[2]
+            )
             << 16
         );
 
         result |=
         (
-            response.payload[3]
+            static_cast<int32_t>(
+                response.payload[3]
+            )
             << 24
         );
 

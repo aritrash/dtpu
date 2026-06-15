@@ -1,4 +1,8 @@
 #include "worker.hpp"
+
+#include "vector.hpp"
+#include "ops.hpp"
+
 #include <stdexcept>
 
 namespace dtpu
@@ -44,19 +48,122 @@ namespace dtpu
             case Opcode::DOT_PRODUCT:
             {
                 //
-                // Placeholder for now
+                // Payload:
                 //
+                // [length]
+                // [vector A]
+                // [vector B]
+                //
+
+                if(
+                    request.payload.empty()
+                )
+                {
+                    throw std::runtime_error(
+                        "Empty payload"
+                    );
+                }
+
+                std::size_t length =
+                    request.payload[0];
+
+                if(
+                    request.payload.size()
+                    !=
+                    1 + (2 * length)
+                )
+                {
+                    throw std::runtime_error(
+                        "Invalid payload size"
+                    );
+                }
+
+                TritVector a;
+
+                TritVector b;
+
+                //
+                // Reconstruct A
+                //
+
+                for(
+                    std::size_t i = 0;
+                    i < length;
+                    ++i
+                )
+                {
+                    a.push_back(
+                        static_cast<Trit>(
+                            request.payload[
+                                1 + i
+                            ]
+                        )
+                    );
+                }
+
+                //
+                // Reconstruct B
+                //
+
+                for(
+                    std::size_t i = 0;
+                    i < length;
+                    ++i
+                )
+                {
+                    b.push_back(
+                        static_cast<Trit>(
+                            request.payload[
+                                1 + length + i
+                            ]
+                        )
+                    );
+                }
+
+                int32_t result =
+                    dot_product(
+                        a,
+                        b
+                    );
 
                 response.header.opcode =
                     Opcode::DOT_PRODUCT;
 
-                response.payload =
-                {
-                    0
-                };
+                //
+                // 4-byte int32 result
+                //
+
+                response.payload.clear();
+
+                response.payload.push_back(
+                    result & 0xFF
+                );
+
+                response.payload.push_back(
+                    (
+                        result >> 8
+                    )
+                    & 0xFF
+                );
+
+                response.payload.push_back(
+                    (
+                        result >> 16
+                    )
+                    & 0xFF
+                );
+
+                response.payload.push_back(
+                    (
+                        result >> 24
+                    )
+                    & 0xFF
+                );
 
                 response.header.payload_length =
-                    1;
+                    static_cast<uint16_t>(
+                        response.payload.size()
+                    );
 
                 break;
             }
