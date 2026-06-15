@@ -6,7 +6,8 @@ void test_ops();
 void test_packed_vector();
 void test_packet();
 void test_worker();
-void test_master();
+void test_master_ping();
+void test_master_dot_product();
 
 int main()
 {
@@ -35,8 +36,12 @@ int main()
     std::cout << "[PASS] Worker\n";
 
     std::cout << "[TEST] Master\n";
-    test_master();
+    test_master_ping();
     std::cout << "[PASS] Master\n";
+
+    std::cout << "[TEST] Dot Product\n";
+    test_master_dot_product();
+    std::cout << "[PASS] Dot Product\n";
 
     std::cout << "\nAll tests passed.\n";
 

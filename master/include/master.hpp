@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include "packet.hpp"
+#include "vector.hpp"
 
 namespace dtpu
 {
@@ -18,5 +19,14 @@ namespace dtpu
         );
 
         uint32_t next_request_id();
+
+        Packet make_dot_product(
+            const TritVector& a,
+            const TritVector& b
+        );
+
+        int32_t process_dot_product(
+            const Packet& response
+        );
     };
 }
