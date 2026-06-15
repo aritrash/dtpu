@@ -4,6 +4,7 @@ void test_trit();
 void test_vector();
 void test_ops();
 void test_packed_vector();
+void test_packet();
 
 int main()
 {
@@ -22,6 +23,10 @@ int main()
     std::cout << "[TEST] PackedTritVector\n";
     test_packed_vector();
     std::cout << "[PASS] PackedTritVector\n";
+
+    std::cout << "[TEST] Packet\n";
+    test_packet();
+    std::cout << "[PASS] Packet\n";
 
     std::cout << "\nAll tests passed.\n";
 

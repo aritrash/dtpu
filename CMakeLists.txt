@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(
     dtpu
     src/main.cpp
+    protocol/src/packet.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
     libtrit/src/ops.cpp
@@ -22,6 +23,8 @@ add_executable(
     tests/test_vector.cpp
     tests/test_ops.cpp
     tests/test_packedvector.cpp
+    tests/test_packet.cpp
+    protocol/src/packet.cpp
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
     libtrit/src/ops.cpp
@@ -33,6 +36,7 @@ add_executable(
 
     benchmarks/benchmark_main.cpp
     benchmarks/benchmark_dot_product.cpp
+    protocol/src/packet.cpp
 
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
@@ -44,12 +48,14 @@ target_include_directories(
     dtpu_tests
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/protocol/include
 )
 
 target_include_directories(
     dtpu_bench
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/protocol/include
     ${CMAKE_SOURCE_DIR}/benchmarks
 )
 
@@ -57,4 +63,5 @@ target_include_directories(
     dtpu
     PRIVATE
     ${CMAKE_SOURCE_DIR}/libtrit/include
+    ${CMAKE_SOURCE_DIR}/protocol/include
 )
