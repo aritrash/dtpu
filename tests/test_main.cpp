@@ -6,6 +6,7 @@ void test_ops();
 void test_packed_vector();
 void test_packet();
 void test_worker();
+void test_master();
 
 int main()
 {
@@ -32,6 +33,10 @@ int main()
     std::cout << "[TEST] Worker\n";
     test_worker();
     std::cout << "[PASS] Worker\n";
+
+    std::cout << "[TEST] Master\n";
+    test_master();
+    std::cout << "[PASS] Master\n";
 
     std::cout << "\nAll tests passed.\n";
 
