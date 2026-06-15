@@ -262,8 +262,8 @@ Upcoming Milestones:
 
 ## Contributors
 
-- Aritrash
-- Ayush
+- Aritrash Sarkar 
+- Ayush Jain
 
 ---
 
