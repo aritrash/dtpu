@@ -28,6 +28,8 @@ add_executable(
     tests/test_packet.cpp
     tests/test_worker.cpp
     tests/test_master.cpp
+    tests/test_uart.cpp
+    tests/test_spi.cpp
     protocol/src/packet.cpp
     worker/src/worker.cpp
     master/src/master.cpp
@@ -36,6 +38,8 @@ add_executable(
     libtrit/src/ops.cpp
     libtrit/src/packed_vector.cpp
     sim/sim_transport.cpp
+    hal/src/spi_transport.cpp
+    hal/src/uart_transport.cpp
 )
 
 add_executable(
@@ -68,6 +72,9 @@ add_executable(
     worker/src/worker.cpp
 
     master/src/master.cpp
+
+    hal/src/spi_transport.cpp
+    hal/src/uart_transport.cpp
 )
 
 add_executable(

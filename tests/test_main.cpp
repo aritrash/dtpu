@@ -9,6 +9,8 @@ void test_worker();
 void test_worker_dot_product();
 void test_master_ping();
 void test_master_dot_product();
+void test_spi();
+void test_uart();
 
 int main()
 {
@@ -47,6 +49,14 @@ int main()
     std::cout << "[TEST] Master Dot Product\n";
     test_master_dot_product();
     std::cout << "[PASS] Master Dot Product\n";
+
+    std::cout << "[TEST] SPI Transport\n";
+    test_spi();
+    std::cout << "[PASS] SPI Transport\n";
+
+    std::cout << "[TEST] UART Transport\n";
+    test_uart();        
+    std::cout << "[PASS] UART Transport\n";
 
     std::cout << "\nAll tests passed.\n";
 
