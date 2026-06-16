@@ -2,98 +2,37 @@
 
 #include "master.hpp"
 #include "worker.hpp"
-#include "packet.hpp"
 #include "vector.hpp"
+#include "packet.hpp"
+#include "sim_transport.hpp"
 
 using namespace dtpu;
 
 int main()
 {
     Master master;
-
     Worker worker;
+    SimTransport transport;
 
-    TritVector a
-    {
-        Trit::NEG,
-        Trit::ZERO,
-        Trit::POS
-    };
+    TritVector a {Trit::NEG, Trit::ZERO, Trit::POS};
+    TritVector b{Trit::POS, Trit::POS, Trit::POS};
 
-    TritVector b
-    {
-        Trit::POS,
-        Trit::POS,
-        Trit::POS
-    };
+    Packet request = master.make_dot_product(a, b);
+    std::cout << "[MASTER] Created DOT_PRODUCT request\n";
 
-    //
-    // Master builds request
-    //
+    auto outbound = serialize(request);
+    transport.send(outbound);
+    auto worker_request = deserialize(transport.receive());
+    std::cout << "[WIRE] " << outbound.size() << " bytes sent\n";
 
-    Packet request =
-        master.make_dot_product(
-            a,
-            b
-        );
+    Packet worker_response = worker.execute(worker_request);
+    std::cout << "[WORKER] Executed DOT_PRODUCT\n";
 
-    std::cout
-        << "[MASTER] Created DOT_PRODUCT request\n";
-
-    //
-    // Simulate wire
-    //
-
-    auto wire =
-        serialize(
-            request
-        );
-
-    std::cout
-        << "[WIRE] "
-        << wire.size()
-        << " bytes sent\n";
-
-    //
-    // Worker receives
-    //
-
-    Packet worker_request =
-        deserialize(
-            wire
-        );
-
-    Packet worker_response =
-        worker.execute(
-            worker_request
-        );
-
-    std::cout
-        << "[WORKER] Executed DOT_PRODUCT\n";
-
-    //
-    // Return wire
-    //
-
-    auto return_wire =
-        serialize(
-            worker_response
-        );
-
-    Packet master_response =
-        deserialize(
-            return_wire
-        );
-
-    int32_t result =
-        master.process_dot_product(
-            master_response
-        );
-
-    std::cout
-        << "[MASTER] Result = "
-        << result
-        << '\n';
+    auto inbound = serialize(worker_response);
+    transport.send(inbound);
+    auto master_response = deserialize(transport.receive());
+    auto result = master.process_dot_product(master_response);
+    std::cout << "[MASTER] Result = " << result << '\n';
 
     return 0;
 }

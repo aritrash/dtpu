@@ -35,6 +35,7 @@ add_executable(
     libtrit/src/vector.cpp
     libtrit/src/ops.cpp
     libtrit/src/packed_vector.cpp
+    sim/sim_transport.cpp
 )
 
 add_executable(
@@ -55,6 +56,7 @@ add_executable(
     dtpu_sim
 
     sim/sim_main.cpp
+    sim/sim_transport.cpp
 
     libtrit/src/trit.cpp
     libtrit/src/vector.cpp
@@ -96,6 +98,8 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/protocol/include
     ${CMAKE_SOURCE_DIR}/worker/include
     ${CMAKE_SOURCE_DIR}/master/include
+    ${CMAKE_SOURCE_DIR}/sim
+    ${CMAKE_SOURCE_DIR}/hal/include
 )
 
 target_include_directories(
@@ -125,6 +129,7 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/worker/include
     ${CMAKE_SOURCE_DIR}/master/include
     ${CMAKE_SOURCE_DIR}/sim
+    ${CMAKE_SOURCE_DIR}/hal/include
 )
 
 target_include_directories(
