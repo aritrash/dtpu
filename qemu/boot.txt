@@ -1,0 +1,8 @@
+qemu-system-aarch64 \
+-monitor none \
+-M virt \
+-cpu cortex-a72 \
+-m 2048 \
+-smp 2 \
+-bios /mingw64/share/qemu/edk2-aarch64-code.fd \
+-drive file=alpine-virt-3.24.1-aarch64.iso,media=cdrom
